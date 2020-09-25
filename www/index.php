@@ -22,9 +22,7 @@ function sortWords(String $string){
 }
 
 $str = 'drinking giving jogging 喝 喝 passing 制图 giving 跑步 吃';
-
 $fStr = sortWords($str);
-
 ?>
 
 <secion>
@@ -37,12 +35,12 @@ $fStr = sortWords($str);
                     <h4>ANSWER</h4>
                 <p class="title">
                     Those are also known as HTTP VERBS.
-                <ul>
-                    <li>The GET method is used to retrieve/query information.</li>
-                    <li>The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response | <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html" target="_blank">source: w3.org</a></li>
-                    <li>POST is a method we use when we need to create or delete a resource.</li>
-                    <li>PUT is used when trying to update a resource.</li>
-                </ul>
+                    <ul>
+                        <li>The GET method is used to retrieve/query information.</li>
+                        <li>The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response | <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html" target="_blank">source: w3.org</a></li>
+                        <li>POST is a method we use when we need to create or delete a resource.</li>
+                        <li>PUT is used when trying to update a resource.</li>
+                    </ul>
                 </p>
                 </div>
                 <div class="divider"></div>
@@ -82,104 +80,26 @@ function launch_astronaut( array $astronaut ) {
                     <li>Show all courses taken by a given person.</li>
                     <li>Show all people and the number of courses they are taking.</li>
                 </ul>
-                <div>
-                    <div class="row">
+                <div class="alert alert-success">
+                    <h4>ANSWER</h4>
+                    <div class="row mt-3">
                         <div class="col-12">
-                            <pre class="alert alert-success">
--- CREATE STRUCTURE
-
-DROP TABLE IF EXISTS `course`;
-
-CREATE TABLE `course` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DROP TABLE IF EXISTS `course_application`;
-
-CREATE TABLE `course_application` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `id_course` int(11) NOT NULL,
-  `application_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_course` (`id_course`,`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-ALTER TABLE course_application
-ADD UNIQUE INDEX( `id_course`, `id_user`);
-                            </pre>
-
+                            <h5>Structure</h5>
+                            <script src="https://gist.github.com/ogabrielguerra/2a6a695c60b51758126219739f3e1a32.js"></script>
                         </div>
 
                         <div class="col-12">
-                            <pre class="alert alert-success">
--- INSERT DATA
-
-INSERT INTO `course` (`id`, `title`)
-VALUES
-	(1,'Cooking for Fun'),
-	(2,'Arduin and Automation'),
-	(3,'Education for Life'),
-	(4,'Modern PHP Definitive Guide');
-
-INSERT INTO `course_application`
-(`id`, `id_user`, `id_course`, `application_date`)
-VALUES
-	(1,1,2,'2020-09-24 17:44:36'),
-	(2,1,3,'2020-09-24 16:34:32'),
-	(3,2,3,'2020-09-24 18:14:06');
-
-INSERT INTO `user` (`id`, `email`, `name`)
-VALUES
-	(1,'edward@foo.com','Edward'),
-	(2,'john@foo.com','John'),
-	(3,'Clair','cliar@foo.com'),
-	(4,'Margareth','margot@foo.com');
-                            </pre>
-                            <a href="q4_sql_script.sql" class="btn btn-info mb-3">Solution Part 1</a>
+                            <h5>Data</h5>
+                            <script src="https://gist.github.com/ogabrielguerra/588b0a3b871010d822c337639ebd421b.js"></script>
                         </div>
                     </div>
-                    <div class="row mt-5">
+                    <div class="row mt-3">
                         <div class="col-12">
-                            <pre class="alert alert-success">
--- COUNT APPLICATIONS BY USER
-
-SELECT ca.id_user, u.name,
-COUNT(ca.id_user) as num_applications
-FROM course_application ca, user u
-WHERE ca.id_user = u.id
-GROUP BY ca.id_user, u.name;
-                            </pre>
-                            <a href="q4_sql_script_2.sql" class="btn btn-info mb-5">Solution Part 2</a>
-                        </div>
-                        <div class="col-12">
-                            <pre class="alert alert-success">
--- COUNT COURSES BY USER OF ID 1
-
-SELECT ca.id, ca.id_user, ca.id_course,
-c.title, u.name, u.email, ca.application_date
-FROM course_application ca , course c, user u
-WHERE ca.id_user = u.id
-AND ca.id_course = c.id
-AND ca.id_user = 1;
-                            </pre>
-                            <a href="q4_sql_script_3.sql" class="btn btn-info">Solution Part 3</a>
+                            <h5>Queries</h5>
+                            <script src="https://gist.github.com/ogabrielguerra/c8073aff6fb1c405f691a615693a5ed0.js"></script>
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="divider"></div>
 
@@ -191,51 +111,24 @@ AND ca.id_user = 1;
                     <li>Removes duplicate English words.</li>
                     <li>Returns the modified string.</li>
                 </ul>
-                <pre class="alert alert-success">
+                <div class="alert alert-success">
                     <h4>ANSWER</h4>
-function sortWords(String $string){
-
-        $words = explode(' ', $string);
-        $numWords = count($words);
-        $englishWords = [];
-        $chineseWords = [];
-
-        for($i=0; $i<$numWords; $i++){
-            if(ctype_alnum($words[$i])){
-                if(!in_array($words[$i], $englishWords, true)) {
-                    array_push($englishWords, $words[$i]);
-                }
-            }else{
-                array_push($chineseWords, $words[$i]);
-            }
-        }
-        return implode(' ', $englishWords) . ' ' . implode(' ', array_reverse($chineseWords));
-    }
+<script src="https://gist.github.com/ogabrielguerra/e76d82db6de91896d2d304ca8b7e28c9.js"></script>
                     <p>FORMATTED STRING: <?=$fStr;?></p>
-                </pre>
+                </div>
                 <div class="divider"></div>
 
                 <span>Question 6</span>
                 <h4>Use a GitHub Branch as a Composer Dependency</h4>
                 <p>Explain how you would configure composer to use `https://github.com/pressbooks/new-private-project` with the branch `bugfixes` in your project.</p>
 
-                <pre class="alert alert-success">
+                <div class="alert alert-success">
                     <h4>ANSWER</h4>
-<p>Since it's a private repository it's necessary to setup the ssh keys for you to communicate with Github properly.<br>
-Then you add the related repository entry as described below:</p>
+                    <p>Since it's a private repository it's necessary to setup the ssh keys for you to communicate with Github properly.<br>
+                    Then you add the related repository entry as described below:</p>
+                    <script src="https://gist.github.com/ogabrielguerra/9667159c1bcca11e0435608a7d960a0e.js"></script>
+                </div>
 
-{
-    "repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/pressbooks/new-private-project"
-    }
-    ],
-    "require": {
-        "pressbooks/new-private-project": "dev-bugfixes"
-    }
-}
-                </pre>
                 <div class="divider"></div>
                 <span>Question 7</span>
                 <h4>Get Pressbooks working locally and attach a screenshot showing that you could do it. If there are problems, document and fix them. </h4>
