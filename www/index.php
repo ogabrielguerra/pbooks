@@ -1,29 +1,4 @@
-<?php
-
-require'header.php';
-
-function sortWords(String $string){
-
-    $words = explode(' ', $string);
-    $numWords = count($words);
-    $englishWords = [];
-    $chineseWords = [];
-
-    for($i=0; $i<$numWords; $i++){
-        if(ctype_alnum($words[$i])){
-            if(!in_array($words[$i], $englishWords, true)) {
-                array_push($englishWords, $words[$i]);
-            }
-        }else{
-            array_push($chineseWords, $words[$i]);
-        }
-    }
-    return implode(' ', $englishWords) . ' ' . implode(' ', array_reverse($chineseWords));
-}
-
-$str = 'drinking giving jogging 喝 喝 passing 制图 giving 跑步 吃';
-$fStr = sortWords($str);
-?>
+<?php require'header.php'; ?>
 
 <secion>
     <div class="container">
@@ -33,16 +8,17 @@ $fStr = sortWords($str);
                 <h4>Explain the differences between HEAD, GET and POST in the HTTP protocol.</h4>
                 <div class="alert alert-success" role="alert">
                     <h4>ANSWER</h4>
-                <p class="title">
-                    Those are also known as HTTP VERBS.
-                    <ul>
-                        <li>The GET method is used to retrieve/query information.</li>
-                        <li>The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response | <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html" target="_blank">source: w3.org</a></li>
-                        <li>POST is a method we use when we need to create or delete a resource.</li>
-                        <li>PUT is used when trying to update a resource.</li>
-                    </ul>
-                </p>
+                    <p class="title">
+                        Those are also known as HTTP VERBS.
+                        <ul>
+                            <li>The GET method is used to retrieve/query information.</li>
+                            <li>The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response | <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html" target="_blank">source: w3.org</a></li>
+                            <li>POST is a method we use when we need to create or delete a resource.</li>
+                            <li>PUT is used when trying to update a resource.</li>
+                        </ul>
+                    </p>
                 </div>
+
                 <div class="divider"></div>
 
                 <span>Question 2</span>
@@ -64,6 +40,7 @@ function launch_astronaut( array $astronaut ) {
     }
 }</pre>
                 <a href="q2.php" class="btn btn-info btn-lg">Solution</a>
+
                 <div class="divider"></div>
 
                 <span>Question 3</span>
@@ -71,6 +48,7 @@ function launch_astronaut( array $astronaut ) {
                 <p>CREATE TABLE astronaut ( name text, weight int ); Write a simple PHP page that displays a form to enter the name and weight of an astronaut and on submission enters those values into the database. (Simple in this case means you do not have to be fancy, but you still need to be complete and correct.</p>
                 <p>Assume the database is running on the local host and use user nasa and password nasa to connect). Use a DB abstraction layer to write your code. Example: PDO or WPDB. Use prepared statements.</p>
                 <a href="q3.php" class="btn btn-info btn-lg">Solution</a>
+
                 <div class="divider"></div>
 
                 <span>Question 4</span>
@@ -113,9 +91,10 @@ function launch_astronaut( array $astronaut ) {
                 </ul>
                 <div class="alert alert-success">
                     <h4>ANSWER</h4>
-<script src="https://gist.github.com/ogabrielguerra/e76d82db6de91896d2d304ca8b7e28c9.js"></script>
-                    <p>FORMATTED STRING: <?=$fStr;?></p>
+                    <script src="https://gist.github.com/ogabrielguerra/e76d82db6de91896d2d304ca8b7e28c9.js"></script>
+                    <p>FORMATTED STRING: drinking giving jogging passing 吃 跑步 制图 喝 喝</p>
                 </div>
+
                 <div class="divider"></div>
 
                 <span>Question 6</span>
@@ -124,14 +103,16 @@ function launch_astronaut( array $astronaut ) {
 
                 <div class="alert alert-success">
                     <h4>ANSWER</h4>
-                    <p>Since it's a private repository it's necessary to setup the ssh keys for you to communicate with Github properly.<br>
+                    <p> <strong>Since it's a private repository it's necessary to setup the ssh keys for you to communicate with Github properly.</strong><br>
                     Then you add the related repository entry as described below:</p>
                     <script src="https://gist.github.com/ogabrielguerra/9667159c1bcca11e0435608a7d960a0e.js"></script>
                 </div>
 
                 <div class="divider"></div>
+
                 <span>Question 7</span>
                 <h4>Get Pressbooks working locally and attach a screenshot showing that you could do it. If there are problems, document and fix them. </h4>
+
                 <div class="divider"></div>
 
                 <span>Question 8</span>
@@ -141,7 +122,9 @@ function launch_astronaut( array $astronaut ) {
                     <h4>ANSWER</h4>
                     The string is encoded as base64 -> ip:186.229.231.8 time:2020-09-18 11:13:32
                 </div>
+
                 <div class="divider"></div>
+
             </div>
         </div>
     </div>
