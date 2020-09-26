@@ -5,3 +5,4 @@ RUN a2enmod rewrite
 COPY uploads.ini /usr/local/etc/php/conf.d
 RUN service apache2 restart
 RUN chown -R www-data:www-data /var/www
+COPY dump/dump.sql /docker-entrypoint-initdb.d/
