@@ -8,7 +8,7 @@ DEFINE ('BASEURL', 'http://localhost/');
 DEFINE('HOST', 'db');
 DEFINE('DATABASE', 'nasa');
 DEFINE('USERNAME', 'root');
-DEFINE('PASSWORD', 'dbpassword');
+DEFINE('PASSWORD', 'nasa');
 
 spl_autoload_register("loadClasses");
 
