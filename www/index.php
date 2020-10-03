@@ -112,7 +112,18 @@ function launch_astronaut( array $astronaut ) {
 
                 <span>Question 7</span>
                 <h4>Get Pressbooks working locally and attach a screenshot showing that you could do it. If there are problems, document and fix them. </h4>
-
+                <div class="alert alert-success">
+                    <h4>ANSWER</h4>
+                    <p>Followed initial steps and when initializing the Vagrant box got an error related to KindeGen plugin. The link is offline because the plugin is being replaced by Amazon. Disabled the plugin installation and restarted the box.</p>
+                    <p>Logged into the Vagrant box through vagrant ssh and restarted the ansible playbook.</p>
+                    <p>Another error popped up. This time the task [saxon-he : Install Saxon-HE] failed. An exception was raised because no module lxml was found. Maybe that was an error related to the ansible version I was running. Once it's fixed, the next error was due to the redis-cache plugin which was missing. Downloaded and copied to the plugins directory.</p>
+                    <p>Installation got into all steps.</p>
+                    <p>After that I had to install Wordpress using wp-cli and then run the "composer install" command. Wait! wp-config was missing. I had to create a new file from provided sample and insert the database credentials. Now we're almost there.</p>
+                    <p>Wordpress is running, we can log as admin and activate the correct theme. Got another warning about the dependencies missing. Fired "composer install" from Aldine dir and there we go.</p>
+                    <p>Below there are some error messages I got through the process.</p>
+                    <p>I've tried to start over with another Vagrant box to validate all the errors, but it's impossible to do that at the time because there's some automation involving the name of the box. When you try to start another box there will be a conflict with the existing box. If you try to change the name, the automation will break. Discovered the hard way and had to run a "vagrant reload" due to issues with the ssh keys.</p>
+                    <a href="screenshots.zip" class="btn btn-info btn-lg">Download Screenshots</a>
+                </div>
                 <div class="divider"></div>
 
                 <span>Question 8</span>
